@@ -1,0 +1,18 @@
+# Composer
+/vendor
+composer.lock
+
+# Tooling
+/.phpunit.cache
+.phpunit.result.cache
+phpunit.xml
+phpstan.neon
+
+# IDEs
+/.idea
+/.fleet
+/.vscode
+
+# Misc
+.DS_Store
+Thumbs.db

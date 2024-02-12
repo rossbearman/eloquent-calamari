@@ -1,0 +1,46 @@
+{
+    "name": "rossbearman/eloquent-calamari",
+    "description": "Obfuscate incrementing IDs with Sqids for Laravel and Eloquent.",
+    "homepage": "https://github.com/rossbearman/eloquent-calamari",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ross Bearman",
+            "email": "ross@rossbearman.co.uk"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "ext-mbstring": "*",
+        "sqids/sqids": "^0.4.0"
+    },
+    "require-dev": {
+        "larastan/larastan": "^2.9",
+        "laravel/pint": "^1.13",
+        "orchestra/testbench": "^8.21",
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "RossBearman\\Sqids\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RossBearman\\Sqids\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "lint": "@php vendor/bin/pint",
+        "analyse": "@php vendor/bin/phpstan analyse",
+        "test": "@php vendor/bin/phpunit"
+    }
+}
