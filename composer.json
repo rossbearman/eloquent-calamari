@@ -13,6 +13,10 @@
     "require": {
         "php": "^8.2",
         "ext-mbstring": "*",
+        "illuminate/config": "^10.0",
+        "illuminate/contracts": "^10.0",
+        "illuminate/database": "^10.0",
+        "illuminate/support": "^10.0",
         "sqids/sqids": "^0.4.0"
     },
     "require-dev": {
@@ -29,6 +33,13 @@
     "autoload-dev": {
         "psr-4": {
             "RossBearman\\Sqids\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RossBearman\\Sqids\\SqidsServiceProvider"
+            ]
         }
     },
     "config": {

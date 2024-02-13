@@ -61,7 +61,7 @@ final class SqidCodecTest extends TestCase
             $codec->encode($id);
         } catch (\Throwable $e) {
             $this->assertSame(InvalidArgumentException::class, get_class($e));
-            $this->assertSame("ID must not be negative and less than PHP's max integer. ID: {$id}", $e->getMessage());
+            $this->assertSame("ID must be non-negative and less than PHP's max integer. ID: {$id}", $e->getMessage());
 
             return;
         }
