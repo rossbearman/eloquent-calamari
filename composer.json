@@ -1,6 +1,7 @@
 {
     "name": "rossbearman/eloquent-calamari",
     "description": "Obfuscate incrementing IDs with Sqids for Laravel and Eloquent.",
+    "keywords": ["sqids","laravel","eloquent","hashids"],
     "homepage": "https://github.com/rossbearman/eloquent-calamari",
     "type": "library",
     "license": "MIT",
