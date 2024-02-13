@@ -10,6 +10,8 @@ use Orchestra\Testbench\Concerns\WithWorkbench;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use RossBearman\Sqids\Tests\Testbench\Models\CalamariFactory;
+use RossBearman\Sqids\Tests\Testbench\Models\OceanFactory;
+use RossBearman\Sqids\Tests\Testbench\Models\SquadFactory;
 use RossBearman\Sqids\Tests\TestCase;
 
 class SqidBasedRoutingTest extends TestCase
@@ -20,24 +22,14 @@ class SqidBasedRoutingTest extends TestCase
     #[Test]
     public function it_can_route_based_on_a_sqid()
     {
-        $entities = CalamariFactory::new()->count(5)->create();
+        $calamaris = CalamariFactory::new()->count(5)->create();
 
-        foreach ($entities as $entity) {
-            $this->get("calamari/{$entity->sqid}")
+        foreach ($calamaris as $calamari) {
+            $this->assertSame($calamari->sqid, $calamari->getRouteKey());
+
+            $this->get("calamari/{$calamari->sqid}")
                 ->assertSuccessful()
-                ->assertExactJson($entity->toArray());
-        }
-    }
-
-    #[Test]
-    public function it_can_route_based_on_other_attributes()
-    {
-        $entities = CalamariFactory::new()->count(5)->create();
-
-        foreach ($entities as $entity) {
-            $this->get("escargot/{$entity->slug}")
-                ->assertSuccessful()
-                ->assertExactJson($entity->toArray());
+                ->assertJson(['id' => $calamari->id]);
         }
     }
 
@@ -51,6 +43,92 @@ class SqidBasedRoutingTest extends TestCase
 
         foreach ($identifiers as $identifier) {
             $this->get("calamari/{$identifier}");
+        }
+    }
+
+    #[Test]
+    public function it_can_route_based_on_other_attributes()
+    {
+        $calamaris = CalamariFactory::new()->count(5)->create();
+
+        foreach ($calamaris as $calamari) {
+            $this->get("admin/calamari/{$calamari->id}")
+                ->assertSuccessful()
+                ->assertJson(['id' => $calamari->id]);
+
+            $this->get("escargot/{$calamari->slug}")
+                ->assertSuccessful()
+                ->assertJson(['id' => $calamari->id]);
+        }
+    }
+
+    #[Test]
+    public function it_can_route_through_children()
+    {
+        $calamari = CalamariFactory::new()->has(
+            CalamariFactory::new()->count(5), 'children'
+        )->create();
+
+        foreach ($calamari->children as $child) {
+            $this->get("calamari/{$child->parent->sqid}/children/{$child->sqid}")
+                ->assertSuccessful()
+                ->assertJson(['id' => $child->id]);
+        }
+    }
+
+    #[Test]
+    public function it_can_route_through_children_using_has_many_through()
+    {
+        $ocean =
+            OceanFactory::new()->has(
+                SquadFactory::new()->has(
+                    CalamariFactory::new()->count(5)
+                )
+            )->create();
+
+        foreach ($ocean->calamaris as $calamari) {
+            $this->get("ocean/{$ocean->sqid}/calamari/{$calamari->sqid}")
+                ->assertSuccessful()
+                ->assertJson(['id' => $calamari->id]);
+        }
+    }
+
+    #[Test]
+    public function it_can_route_through_children_with_other_attributes()
+    {
+        $squad = SquadFactory::new()->has(
+            CalamariFactory::new()->count(5)
+        )->create();
+
+        foreach ($squad->calamaris as $calamari) {
+            $this->get("admin/squad/{$calamari->squad->slug}/calamari/{$calamari->id}")
+                ->assertSuccessful()
+                ->assertJson(['id' => $calamari->id]);
+        }
+    }
+
+    #[Test]
+    public function it_handles_route_key_being_overridden()
+    {
+        $squad = SquadFactory::new()->create();
+
+        $this->get("squad/{$squad->slug}")
+            ->assertSuccessful()
+            ->assertJson(['id' => $squad->id]);
+    }
+
+    #[Test]
+    public function it_handles_soft_deletes()
+    {
+        $calamaris = CalamariFactory::new()->deleted()->count(5)->create();
+
+        foreach ($calamaris as $calamari) {
+            $this->get("deleted/calamari/{$calamari->sqid}")
+                ->assertSuccessful()
+                ->assertJson(['id' => $calamari->id]);
+
+            $this->expectException(ModelNotFoundException::class);
+            $this->get("calamari/{$calamari->sqid}");
         }
     }
 
