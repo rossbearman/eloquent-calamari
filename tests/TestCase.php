@@ -19,6 +19,7 @@ class TestCase extends OrchestraTestCase
     {
         parent::setUp();
 
+        $this->withoutMockingConsoleOutput();
         $this->withoutExceptionHandling();
 
         $this->loadMigrationsFrom(__DIR__ . '/Testbench/database/migrations');
