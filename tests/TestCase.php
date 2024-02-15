@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace RossBearman\Sqids\Tests;
 
-use Illuminate\Foundation\Application;
 use Illuminate\Routing\Middleware\SubstituteBindings;
-use Illuminate\Routing\Router;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use RossBearman\Sqids\SqidsServiceProvider;
 use RossBearman\Sqids\Tests\Testbench\Models\Calamari;
