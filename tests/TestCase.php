@@ -32,40 +32,36 @@ class TestCase extends OrchestraTestCase
 
     protected function defineRoutes($router): void
     {
-        $router->get('/calamari/{calamari}', function (Calamari $calamari) {
-            return $calamari;
-        })->middleware(SubstituteBindings::class);
+        $router->get('/calamari/{calamari}', fn (Calamari $calamari) => $calamari)
+            ->middleware(SubstituteBindings::class);
 
-        $router->get('/calamari/{calamari}/children/{child}', function (Calamari $calamari, Calamari $child) {
-            return $child;
-        })->scopeBindings()->middleware(SubstituteBindings::class);
+        $router->get('/calamari/{calamari}/children/{child}', fn (Calamari $calamari, Calamari $child) => $child)
+            ->middleware(SubstituteBindings::class)
+            ->scopeBindings();
 
-        $router->get('/deleted/calamari/{calamari}', function (Calamari $calamari) {
-            return $calamari;
-        })->withTrashed()->middleware(SubstituteBindings::class);
+        $router->get('/deleted/calamari/{calamari}', fn (Calamari $calamari) => $calamari)
+            ->middleware(SubstituteBindings::class)
+            ->withTrashed();
 
-        $router->get('/squad/{squad}', function (Squad $squad) {
-            return $squad;
-        })->middleware(SubstituteBindings::class);
+        $router->get('/squad/{squad}', fn (Squad $squad) => $squad)
+            ->middleware(SubstituteBindings::class);
 
-        $router->get('/squad/{squad}/calamari/{calamari}', function (Squad $squad, Calamari $calamari) {
-            return $calamari;
-        })->scopeBindings()->middleware(SubstituteBindings::class);
+        $router->get('/squad/{squad}/calamari/{calamari}', fn (Squad $squad, Calamari $calamari) => $calamari)
+            ->middleware(SubstituteBindings::class)
+            ->scopeBindings();
 
-        $router->get('/ocean/{ocean}/calamari/{calamari}', function (Ocean $ocean, Calamari $calamari) {
-            return $calamari;
-        })->scopeBindings()->middleware(SubstituteBindings::class);
+        $router->get('/ocean/{ocean}/calamari/{calamari}', fn (Ocean $ocean, Calamari $calamari) => $calamari)
+            ->middleware(SubstituteBindings::class)
+            ->scopeBindings();
 
-        $router->get('/admin/calamari/{calamari:id}', function (Calamari $calamari) {
-            return $calamari;
-        })->middleware(SubstituteBindings::class);
+        $router->get('/admin/calamari/{calamari:id}', fn (Calamari $calamari) => $calamari)
+            ->middleware(SubstituteBindings::class);
 
-        $router->get('/admin/squad/{squad}/calamari/{calamari:id}', function (Squad $squad, Calamari $calamari) {
-            return $calamari;
-        })->scopeBindings()->middleware(SubstituteBindings::class);
+        $router->get('/admin/squad/{squad}/calamari/{calamari:id}', fn (Squad $squad, Calamari $calamari) => $calamari)
+            ->middleware(SubstituteBindings::class)
+            ->scopeBindings();
 
-        $router->get('/escargot/{calamari:slug}', function (Calamari $calamari) {
-            return $calamari;
-        })->middleware(SubstituteBindings::class);
+        $router->get('/escargot/{calamari:slug}', fn (Calamari $calamari) => $calamari)
+            ->middleware(SubstituteBindings::class);
     }
 }

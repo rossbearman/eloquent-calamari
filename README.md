@@ -25,7 +25,7 @@ Require this package with [Composer](https://getcomposer.org/).
 Add the `HasSqid` and `SqidBasedRouting` traits to your models.
 
 ```php
-use RossBearman\Sqids\HasSqids;
+use RossBearman\Sqids\HasSqid;
 use RossBearman\Sqids\SqidBasedRouting;
 
 class Customer extends Model
@@ -36,9 +36,7 @@ class Customer extends Model
 
 Create a route for your model.
 ```php
-Route::get('/customer/{customer}', function (Customer $customer) {
-    return $customer;
-});
+Route::get('/customer/{customer}', fn (Customer $customer) => $customer);
 ```
 
 ```php
@@ -95,14 +93,10 @@ class Customer extends Model
 
 ```php
 // Routes by ID by default
-Route::get('/admin/{customer}', function (Customer $customer) {
-    return $customer;
-});
+Route::get('/admin/customer/{customer}', fn (Customer $customer) => $customer);
 
 // Routes by Sqid when specified
-Route::get('/customer/{customer:sqid}', function (Customer $customer) {
-    return $customer;
-});
+Route::get('/customer/{customer:sqid}', fn (Customer $customer) => $customer);
 ```
 
 

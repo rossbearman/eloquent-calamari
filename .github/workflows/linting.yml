@@ -30,3 +30,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Fix code style
+          commit_user_name: laravel-pint
