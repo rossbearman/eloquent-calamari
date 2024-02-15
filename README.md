@@ -42,8 +42,8 @@ Route::get('/customer/{customer}', function (Customer $customer) {
 ```php
 $customer = Customer::create(['name' => 'Squidward']);
 
-$customer->id // 1
-$customer->sqid // 3irWXI2rFV
+$customer->id; // 1
+$customer->sqid; // 3irWXI2rFV
 ```
 
 `example.com/customer/3irWXI2rFV` now returns the Customer details.
@@ -132,7 +132,7 @@ You can also generate alphabets for multiple models at once.
 php artisan sqids:alphabet App\Models\Customer App\Models\Order App\Models\Invoice
 ```
 
-Follow the instructions provided by the command to add the new keys to your config and `.env` file.
+Follow the instructions provided by the command to add the new keys to your `config/sqids.php` and `.env` files.
 
 ### Confirm alphabet is being used
 
@@ -142,7 +142,7 @@ To ensure that Eloquent Calamari is using the expected alphabet for a specific m
 php artisan sqids:check
 ```
 
-This command will list all the models that have successfully been registered in the config and whether or not the class string can be resolve to a class in the application.
+This will list all the models that have successfully been registered in the config and whether the class string can be resolved to a class in your application.
 
 ### Setting minimum Sqid lengths
 
@@ -155,6 +155,8 @@ By default, all Sqids will be a minimum of 10 characters. You can adjust this fo
         App\Model\Invoice::class => 30,
     ],
 ```
+
+The maximum length of a Sqid is dependent on the input ID and the alphabet used. A more varied alphabet (upper and lower case letters, numbers and symbols) will result in shorter Sqids.
 
 ### Canonical Sqids
 By design, [multiple Sqids can resolve to the same number](https://sqids.org/faq#collisions), however Eloquent Calamari will always return the same Sqid for a given number. Furthermore, this is the only Sqid that can be used to access an entity, and any other Sqid that would normally resolve to the same number will be rejected.
