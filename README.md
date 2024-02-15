@@ -1,7 +1,9 @@
 # Eloquent Calamari
 
 [![Latest Stable Version](https://poser.pugx.org/rossbearman/eloquent-calamari/v/stable?style=flat-square)](https://packagist.org/packages/rossbearman/eloquent-calamari)
-[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Test Status](https://img.shields.io/github/actions/workflow/status/rossbearman/eloquent-calamari/phpunit.yml?label=tests&style=flat-square)](https://github.com/rossbearman/eloquent-calamari/actions/workflows/phpunit.yml?query=branch:main)
+[![Analysis Status](https://img.shields.io/github/actions/workflow/status/rossbearman/eloquent-calamari/phpstan.yml?label=analysis&style=flat-square)](https://github.com/rossbearman/eloquent-calamari/actions/workflows/phpstan.yml?query=branch:main)
+[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/rossbearman/eloquent-calamari/blob/main/LICENSE.md)
 
 Eloquent Calamari integrates the [Sqids](https://sqids.org/php)[^1] algorithm into Laravel and Eloquent, enabling you to seamlessly use obfuscated, unique IDs in place of your internal auto-incrementing IDs.
 

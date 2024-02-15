@@ -1,0 +1,47 @@
+name: PHPUnit
+
+on:
+  pull_request:
+    paths:
+      - '**.php'
+      - 'phpunit.xml.dist'
+  push:
+    paths:
+      - '**.php'
+      - 'phpunit.xml.dist'
+  workflow_dispatch:
+
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php:
+          - 8.2
+          - 8.3
+        dependencies:
+          - "highest"
+          - "lowest"
+
+    name: PHP ${{ matrix.php }} (dependency-versions - ${{ matrix.dependencies }})
+
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, intl, fileinfo
+          coverage: none
+
+      - uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+
+      - name: Installed dependencies
+        run: composer show -D
+
+      - name: Run PHPUnit
+        run: ./vendor/bin/phpunit
