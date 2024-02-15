@@ -45,15 +45,22 @@ final class AlphabetCommand extends Command
     /** @param Collection<string, SqidCodec> $codecs */
     protected function printInstructions(Collection $codecs): void
     {
-        $this->warn('Update your `sqids.php` config file to include the following items:');
+        if (!file_exists(config_path('sqids.php'))) {
+            $this->warn('Publish the Eloquent Calamari config file:');
+            $this->newLine();
+            $this->info('php artisan vendor:publish --provider="RossBearman\Sqids\SqidsServiceProvider"');
+            $this->newLine();
+        }
+
+        $this->warn('Update your `config/sqids.php` file to include the following items:');
         $this->newLine();
         $this->info("'alphabets' => [");
 
         foreach ($codecs as $model => $codec) {
-            $this->info("    {$model}::class => env('{$this->getEnvKey($model)}')");
+            $this->info('    ' . $model . "::class => env('{$this->getEnvKey($model)}'),");
         }
 
-        $this->info("'];");
+        $this->info('];');
         $this->newLine();
         $this->warn('And add these keys to your .env:');
         $this->newLine();

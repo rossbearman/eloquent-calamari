@@ -120,16 +120,16 @@ Start by publishing the `sqids.php` config file to your `config` directory.
 php artisan vendor:publish --provider="RossBearman\Sqids\SqidsServiceProvider"
 ```
 
-Then generate a new alphabet for your  model.
+Then generate a new alphabet for your model.
 
 ```shell
-php artisan sqids:alphabet App\Models\Customer
+php artisan sqids:alphabet "App\Models\Customer"
 ```
 
 You can also generate alphabets for multiple models at once.
 
 ```shell
-php artisan sqids:alphabet App\Models\Customer App\Models\Order App\Models\Invoice
+php artisan sqids:alphabet "App\Models\Customer" "App\Models\Order" "App\Models\Invoice"
 ```
 
 Follow the instructions provided by the command to add the new keys to your `config/sqids.php` and `.env` files.
