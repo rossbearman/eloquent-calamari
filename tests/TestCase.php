@@ -19,8 +19,6 @@ class TestCase extends OrchestraTestCase
 
         $this->withoutMockingConsoleOutput();
         $this->withoutExceptionHandling();
-
-        $this->loadMigrationsFrom(__DIR__ . '/Testbench/database/migrations');
     }
 
     protected function getPackageProviders($app): array
@@ -28,6 +26,11 @@ class TestCase extends OrchestraTestCase
         return [
             SqidsServiceProvider::class,
         ];
+    }
+
+    protected function defineDatabaseMigrations(): void
+    {
+        $this->loadMigrationsFrom(__DIR__ . '/Testbench/database/migrations');
     }
 
     protected function defineRoutes($router): void

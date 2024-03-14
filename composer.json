@@ -14,16 +14,16 @@
     "require": {
         "php": "^8.2",
         "ext-mbstring": "*",
-        "illuminate/config": "^10.0",
-        "illuminate/contracts": "^10.0",
-        "illuminate/database": "^10.0",
-        "illuminate/support": "^10.0",
+        "illuminate/config": "^10.0 | ^11.0",
+        "illuminate/contracts": "^10.0 | ^11.0",
+        "illuminate/database": "^10.0 | ^11.0",
+        "illuminate/support": "^10.0 | ^11.0",
         "sqids/sqids": "^0.4.0"
     },
     "require-dev": {
         "larastan/larastan": "^2.9",
         "laravel/pint": "^1.13",
-        "orchestra/testbench": "^8.21",
+        "orchestra/testbench": "^8.21 | ^v9.0",
         "phpunit/phpunit": "^10.5"
     },
     "autoload": {
