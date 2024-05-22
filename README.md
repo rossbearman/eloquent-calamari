@@ -1,4 +1,4 @@
-# Eloquent Calamari
+# Eloquent Calamari - Sqids for Laravel Models
 
 [![Latest Stable Version](https://poser.pugx.org/rossbearman/eloquent-calamari/v/stable?style=flat-square)](https://packagist.org/packages/rossbearman/eloquent-calamari)
 [![Test Status](https://img.shields.io/github/actions/workflow/status/rossbearman/eloquent-calamari/phpunit.yml?label=tests&style=flat-square)](https://github.com/rossbearman/eloquent-calamari/actions/workflows/phpunit.yml?query=branch:main)
