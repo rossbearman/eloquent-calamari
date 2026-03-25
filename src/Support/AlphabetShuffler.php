@@ -27,7 +27,15 @@ final readonly class AlphabetShuffler
      */
     public function shuffle(): Alphabet
     {
-        return new Alphabet(implode($this->randomizer->shuffleArray($this->alphabet)));
+        $shuffled = '';
+
+        foreach ($this->randomizer->shuffleArray($this->alphabet) as $char) {
+            if (is_string($char)) {
+                $shuffled .= $char;
+            }
+        }
+
+        return new Alphabet($shuffled);
     }
 
     /**

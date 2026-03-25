@@ -15,6 +15,7 @@ trait HasSqid
         static::addGlobalScope(new SqidScope);
     }
 
+    /** @return Attribute<string|null, never> */
     protected function sqid(): Attribute
     {
         return Attribute::make(

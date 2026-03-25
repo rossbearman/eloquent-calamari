@@ -19,13 +19,17 @@ final class AlphabetCommand extends Command
 
     public function handle(Sqids $sqids): void
     {
-        if (count($this->argument('models')) === 0) {
+        $models = $this->argument('models');
+
+        if (!is_array($models) || count($models) === 0) {
             $this->info((string) $sqids->shuffleDefaultAlphabet(bin2hex(random_bytes(32))));
 
             return;
         }
 
-        $alphabets = collect($this->argument('models'))->mapWithKeys(
+        $models = array_filter($models, 'is_string');
+
+        $alphabets = collect($models)->mapWithKeys(
             fn (string $model) => [$model => (string) $sqids->shuffleDefaultAlphabet(bin2hex(random_bytes(32)))]
         );
 

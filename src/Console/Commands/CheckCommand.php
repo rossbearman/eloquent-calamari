@@ -31,7 +31,9 @@ final class CheckCommand extends Command
          * Alphabet: s7tc0TE3AfrqyMjFvbgunkhZDBp6NCIRJoQldLm8wYxHa5iWzVeP124SXUOK9G
          * ````
          */
-        if (count($this->argument('models')) === 0) {
+        $models = $this->argument('models');
+
+        if (!is_array($models) || count($models) === 0) {
             if (empty($config->getAlphabets())) {
                 $this->error('No alphabets have been defined for models in `sqids.php`');
 

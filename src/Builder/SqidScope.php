@@ -28,8 +28,9 @@ class SqidScope implements Scope
             );
         });
 
-        $builder->macro('whereSqidIn', function (Builder $builder, array $sqids, $boolean = 'and', $not = false) {
+        $builder->macro('whereSqidIn', function (Builder $builder, array $sqids, string $boolean = 'and', bool $not = false) {
             $model = $builder->getModel();
+            $sqids = array_filter($sqids, 'is_string');
 
             return $builder->whereIn(
                 $model->qualifyColumn($model->getKeyName()),
@@ -55,7 +56,5 @@ class SqidScope implements Scope
     /**
      * @param  Builder<TModelClass>  $builder
      */
-    public function apply(Builder $builder, Model $model)
-    {
-    }
+    public function apply(Builder $builder, Model $model) {}
 }

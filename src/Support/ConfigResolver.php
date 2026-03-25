@@ -31,22 +31,16 @@ class ConfigResolver
     protected array $modelMinLengths = [];
 
     /**
-     * @param array{
-     *     'alphabet': string,
-     *     'alphabets': array<class-string, string>,
-     *     'min_length': int,
-     *     'min_lengths': array<class-string, int>,
-     *     'key': string,
-     *     'blocklist': array<int, string>,
-     *     'canonical_checks': array<class-string, bool>
-     * } $config
-     *
      * @throws InvalidAlphabetException
      * @throws InvalidConfigException
      * @throws InvalidMinLengthException
      */
-    public function __construct(array $config)
+    public function __construct(mixed $config)
     {
+        if (!is_array($config)) {
+            throw new InvalidConfigException('The sqids configuration must be an array');
+        }
+
         $this->resolveAlphabet($config);
         $this->resolveMinLength($config);
         $this->resolveKey($config);
@@ -163,7 +157,7 @@ class ConfigResolver
     }
 
     /**
-     * @param  array<string, mixed>  $config
+     * @param  array<mixed, mixed>  $config
      *
      * @throws InvalidConfigException
      */
@@ -181,7 +175,7 @@ class ConfigResolver
     }
 
     /**
-     * @param  array<string, mixed>  $config
+     * @param  array<mixed, mixed>  $config
      *
      * @throws InvalidAlphabetException
      */
@@ -201,7 +195,7 @@ class ConfigResolver
     }
 
     /**
-     * @param  array<string, mixed>  $config
+     * @param  array<mixed, mixed>  $config
      *
      * @throws InvalidMinLengthException
      */
@@ -221,7 +215,7 @@ class ConfigResolver
     }
 
     /**
-     * @param  array<string, mixed>  $config
+     * @param  array<mixed, mixed>  $config
      *
      * @throws InvalidConfigException
      * @throws InvalidAlphabetException
@@ -237,7 +231,7 @@ class ConfigResolver
         }
 
         foreach ($config['alphabets'] as $model => $alphabet) {
-            if (!is_string($model)) {
+            if (!is_string($model) || !is_string($alphabet)) {
                 throw new InvalidConfigException('`sqids.alphabets` must be an array<class-string, string>');
             }
 
@@ -246,7 +240,7 @@ class ConfigResolver
     }
 
     /**
-     * @param  array<string, mixed>  $config
+     * @param  array<mixed, mixed>  $config
      *
      * @throws InvalidConfigException
      * @throws InvalidMinLengthException
@@ -262,7 +256,7 @@ class ConfigResolver
         }
 
         foreach ($config['min_lengths'] as $model => $minLength) {
-            if (!is_string($model)) {
+            if (!is_string($model) || !is_int($minLength)) {
                 throw new InvalidConfigException('`sqids.min_lengths` must be an array<class-string, int>');
             }
 
@@ -271,7 +265,7 @@ class ConfigResolver
     }
 
     /**
-     * @param  array<string, mixed>  $config
+     * @param  array<mixed, mixed>  $config
      *
      * @throws InvalidConfigException
      */

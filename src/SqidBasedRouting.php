@@ -16,7 +16,7 @@ trait SqidBasedRouting
             return parent::resolveRouteBindingQuery($query, $value, $field);
         }
 
-        return $this->whereSqid(sqid: $value);
+        return $this->whereSqid($value);
     }
 
     public function getRouteKeyName(): string

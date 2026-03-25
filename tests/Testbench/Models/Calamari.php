@@ -16,16 +16,19 @@ class Calamari extends Model
     use HasSqid, SqidBasedRouting;
     use SoftDeletes;
 
+    /** @return BelongsTo<Squad, $this> */
     public function squad(): BelongsTo
     {
         return $this->belongsTo(Squad::class);
     }
 
+    /** @return BelongsTo<Calamari, $this> */
     public function parent(): BelongsTo
     {
         return $this->belongsTo(Calamari::class, 'parent_id');
     }
 
+    /** @return HasMany<Calamari, $this> */
     public function children(): HasMany
     {
         return $this->hasMany(Calamari::class, 'parent_id');

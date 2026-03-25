@@ -7,6 +7,7 @@ namespace RossBearman\Sqids\Tests\Testbench\Models;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
+/** @extends Factory<Squad> */
 class SquadFactory extends Factory
 {
     protected $model = Squad::class;

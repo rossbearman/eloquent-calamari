@@ -4,8 +4,6 @@ includes:
 parameters:
     paths:
         - src/
+        - tests/Testbench/
 
     level: max
-
-    ignoreErrors:
-        - "#Cannot access offset '[a-zA-Z]+' on Illuminate\\\\Contracts\\\\Foundation\\\\Application.#"

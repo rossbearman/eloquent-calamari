@@ -20,7 +20,7 @@ return [
      * invalidate Sqids that are actively being used.
      */
     'alphabets' => [
-        //App\Models\Customer::class => env('SQIDS_CUSTOMER_ALPHABET'),
+        // App\Models\Customer::class => env('SQIDS_CUSTOMER_ALPHABET'),
     ],
 
     /**
@@ -34,7 +34,7 @@ return [
      * The minimum length for Sqids generated for a specific model.
      */
     'min_lengths' => [
-        //App\Models\Customer::class => 6,
+        // App\Models\Customer::class => 6,
     ],
 
     /**
@@ -59,6 +59,6 @@ return [
      * `true` is the default for all models and does not need to be specified
      */
     'canonical_checks' => [
-        //App\Models\Customer::class => false,
+        // App\Models\Customer::class => false,
     ],
 ];

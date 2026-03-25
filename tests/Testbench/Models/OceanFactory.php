@@ -6,6 +6,7 @@ namespace RossBearman\Sqids\Tests\Testbench\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/** @extends Factory<Ocean> */
 class OceanFactory extends Factory
 {
     protected $model = Ocean::class;

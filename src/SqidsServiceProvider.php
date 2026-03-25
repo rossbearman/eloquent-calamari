@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace RossBearman\Sqids;
 
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use RossBearman\Sqids\Console\Commands\AlphabetCommand;
@@ -15,13 +16,13 @@ final class SqidsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(Sqids::class, function (Application $app) {
-            return new Sqids(new ConfigResolver($app['config']['sqids']));
+            return new Sqids(new ConfigResolver($app->make(Repository::class)->get('sqids')));
         });
 
         $this->app->when(CheckCommand::class)
             ->needs(ConfigResolver::class)
             ->give(function (Application $app) {
-                return new ConfigResolver($app['config']['sqids']);
+                return new ConfigResolver($app->make(Repository::class)->get('sqids'));
             });
     }
 

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
+/** @extends Factory<Calamari> */
 class CalamariFactory extends Factory
 {
     protected $model = Calamari::class;
@@ -22,6 +23,7 @@ class CalamariFactory extends Factory
         ];
     }
 
+    /** @return Factory<Calamari> */
     public function deleted(): Factory
     {
         return $this->state(fn () => [

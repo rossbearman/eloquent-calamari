@@ -14,11 +14,13 @@ class Ocean extends Model
 {
     use HasSqid, SqidBasedRouting;
 
+    /** @return HasMany<Squad, $this> */
     public function squads(): HasMany
     {
         return $this->hasMany(Squad::class);
     }
 
+    /** @return HasManyThrough<Calamari, Squad, $this> */
     public function calamaris(): HasManyThrough
     {
         return $this->hasManyThrough(Calamari::class, Squad::class);

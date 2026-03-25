@@ -22,6 +22,7 @@ class Squad extends Model
         return 'slug';
     }
 
+    /** @return HasMany<Calamari, $this> */
     public function calamaris(): HasMany
     {
         return $this->hasMany(Calamari::class);
